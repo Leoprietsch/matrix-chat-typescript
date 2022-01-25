@@ -22,5 +22,15 @@ module.exports = {
       { devDependencies: ['**/test.tsx', '**/test.ts'] },
     ],
     '@typescript-eslint/indent': [2, 2],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
   },
 };
