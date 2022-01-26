@@ -1,10 +1,14 @@
 import { Box, TextField } from '@skynexui/components';
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../components/chat/Header';
 import MessageList from '../components/chat/MessageList';
+import Message from '../entities/Message';
 import appConfig from '../styles.json';
 
 export default function Chat() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [message, setMessage] = useState('');
+
   return (
     <Box
       styleSheet={{
@@ -51,11 +55,7 @@ export default function Chat() {
             padding: '16px',
           }}
         >
-          <MessageList
-            id="1"
-            text="Text message displayed on chat"
-            from="peas"
-          />
+          <MessageList messages={messages} />
           <Box
             as="form"
             styleSheet={{
@@ -64,6 +64,18 @@ export default function Chat() {
             }}
           >
             <TextField
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+              onKeyPress={(event) => {
+                if (event.key === 'Enter') {
+                  const newMessage: Message = {
+                    text: message,
+                    from: 'user',
+                  };
+                  setMessages([...messages, newMessage]);
+                  setMessage('');
+                }
+              }}
               name="message"
               placeholder="Insira sua mensagem aqui..."
               type="textarea"

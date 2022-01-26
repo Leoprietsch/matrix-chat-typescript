@@ -1,27 +1,13 @@
 import { Box, Text, Image } from '@skynexui/components';
 import appConfig from '../../styles.json';
+import Message from '../../entities/Message';
 
-interface Message {
-  id: string;
-  text: string;
-  from: string;
-}
+export default function MessageList(props: { messages: Message[] }) {
+  const { messages } = props;
 
-export default function MessageList(props: Message) {
-  const { id, text, from } = props;
-
-  return (
-    <Box
-      tag="ul"
-      styleSheet={{
-        overflow: 'scroll',
-        display: 'flex',
-        flexDirection: 'column-reverse',
-        flex: 1,
-        color: appConfig.theme.colors.neutrals['000'],
-        marginBottom: '16px',
-      }}
-    >
+  const renderMessages = (messagesToRender: Message[]) => messagesToRender.map((message) => {
+    const { id, from, text } = message;
+    return (
       <Text
         key={id}
         tag="li"
@@ -63,6 +49,22 @@ export default function MessageList(props: Message) {
         </Box>
         {text}
       </Text>
+    ) as React.ReactElement;
+  });
+
+  return (
+    <Box
+      tag="ul"
+      styleSheet={{
+        overflow: 'scroll',
+        display: 'flex',
+        flexDirection: 'column-reverse',
+        flex: 1,
+        color: appConfig.theme.colors.neutrals['000'],
+        marginBottom: '16px',
+      }}
+    >
+      {renderMessages(messages)}
     </Box>
   );
 }
