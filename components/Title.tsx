@@ -17,9 +17,9 @@ function Title(props: HeadingProps) {
   return (
     <>
       <Heading tag={tag}>{children}</Heading>
-      <style jsx>
+      <style>
         {`
-          h1 {
+          ${tag} {
             color: ${appConfig.theme.colors.neutrals['000']};
             font-size: 24px;
             font-weight: 600;
