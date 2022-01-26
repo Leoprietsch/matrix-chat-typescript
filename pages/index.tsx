@@ -17,6 +17,8 @@ function HomePage() {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: appConfig.theme.colors.primary[500],
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         backgroundImage:
           'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
         backgroundRepeat: 'no-repeat',
@@ -34,6 +36,8 @@ function HomePage() {
             sm: 'row',
           },
           width: '100%',
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           maxWidth: '700px',
           borderRadius: '5px',
           padding: '32px',
@@ -44,6 +48,8 @@ function HomePage() {
       >
         <Box
           as="form"
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           onSubmit={(event: SubmitEvent) => {
             event.preventDefault();
             router.push('/chat');
@@ -82,6 +88,8 @@ function HomePage() {
                 mainColorHighlight: appConfig.theme.colors.primary[500],
                 backgroundColor: appConfig.theme.colors.neutrals[800],
               },
+              positive: {},
+              negative: {},
             }}
           />
           <Button
@@ -101,6 +109,8 @@ function HomePage() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             maxWidth: '200px',
             padding: '16px',
             backgroundColor: appConfig.theme.colors.neutrals[800],
@@ -108,6 +118,8 @@ function HomePage() {
             borderColor: appConfig.theme.colors.neutrals[999],
             borderRadius: '10px',
             flex: 1,
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             minHeight: '240px',
           }}
         >
