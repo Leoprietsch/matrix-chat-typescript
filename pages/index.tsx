@@ -2,135 +2,136 @@ import {
   Box, Button, Text, TextField, Image,
 } from '@skynexui/components';
 import React, { ChangeEvent, useState } from 'react';
+import { useRouter } from 'next/router';
 import appConfig from '../styles.json';
 import Title from '../components/Title';
 
-import GlobalStyle from '../utils/GlobalStyle';
-
 function HomePage() {
   const [user, setUser] = useState('leoprietsch');
+  const router = useRouter();
 
   return (
-    <>
-      <GlobalStyle />
+    <Box
+      styleSheet={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: appConfig.theme.colors.primary[500],
+        backgroundImage:
+          'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundBlendMode: 'multiply',
+      }}
+    >
       <Box
         styleSheet={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: appConfig.theme.colors.primary[500],
-          backgroundImage:
-            'url(https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundBlendMode: 'multiply',
+          justifyContent: 'space-between',
+          flexDirection: {
+            xs: 'column',
+            sm: 'row',
+          },
+          width: '100%',
+          maxWidth: '700px',
+          borderRadius: '5px',
+          padding: '32px',
+          margin: '16px',
+          boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
+          backgroundColor: appConfig.theme.colors.neutrals[700],
         }}
       >
         <Box
+          as="form"
+          onSubmit={(event: SubmitEvent) => {
+            event.preventDefault();
+            router.push('/chat');
+          }}
           styleSheet={{
             display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            flexDirection: {
-              xs: 'column',
-              sm: 'row',
-            },
-            width: '100%',
-            maxWidth: '700px',
-            borderRadius: '5px',
-            padding: '32px',
-            margin: '16px',
-            boxShadow: '0 2px 10px 0 rgb(0 0 0 / 20%)',
-            backgroundColor: appConfig.theme.colors.neutrals[700],
+            justifyContent: 'center',
+            width: { xs: '100%', sm: '50%' },
+            textAlign: 'center',
+            marginBottom: '32px',
           }}
         >
-          <Box
-            as="form"
+          <Title tag="h1">Boas vindas de volta!</Title>
+          <Text
+            variant="body3"
             styleSheet={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: { xs: '100%', sm: '50%' },
-              textAlign: 'center',
               marginBottom: '32px',
+              color: appConfig.theme.colors.neutrals[300],
             }}
           >
-            <Title tag="h1">Boas vindas de volta!</Title>
-            <Text
-              variant="body3"
-              styleSheet={{
-                marginBottom: '32px',
-                color: appConfig.theme.colors.neutrals[300],
-              }}
-            >
-              {appConfig.name}
-            </Text>
+            {appConfig.name}
+          </Text>
 
-            <TextField
-              name="user"
-              onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                setUser(event.target.value);
-              }}
-              fullWidth
-              textFieldColors={{
-                neutral: {
-                  textColor: appConfig.theme.colors.neutrals[200],
-                  mainColor: appConfig.theme.colors.neutrals[900],
-                  mainColorHighlight: appConfig.theme.colors.primary[500],
-                  backgroundColor: appConfig.theme.colors.neutrals[800],
-                },
-              }}
-            />
-            <Button
-              type="submit"
-              label="Login"
-              fullWidth
-              buttonColors={{
-                contrastColor: appConfig.theme.colors.neutrals['000'],
-                mainColor: appConfig.theme.colors.primary[500],
-                mainColorLight: appConfig.theme.colors.primary[400],
-                mainColorStrong: appConfig.theme.colors.primary[600],
-              }}
-            />
-          </Box>
-          <Box
+          <TextField
+            name="user"
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setUser(event.target.value);
+            }}
+            fullWidth
+            textFieldColors={{
+              neutral: {
+                textColor: appConfig.theme.colors.neutrals[200],
+                mainColor: appConfig.theme.colors.neutrals[900],
+                mainColorHighlight: appConfig.theme.colors.primary[500],
+                backgroundColor: appConfig.theme.colors.neutrals[800],
+              },
+            }}
+          />
+          <Button
+            type="submit"
+            label="Login"
+            fullWidth
+            buttonColors={{
+              contrastColor: appConfig.theme.colors.neutrals['000'],
+              mainColor: appConfig.theme.colors.primary[500],
+              mainColorLight: appConfig.theme.colors.primary[400],
+              mainColorStrong: appConfig.theme.colors.primary[600],
+            }}
+          />
+        </Box>
+        <Box
+          styleSheet={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            maxWidth: '200px',
+            padding: '16px',
+            backgroundColor: appConfig.theme.colors.neutrals[800],
+            border: '1px solid',
+            borderColor: appConfig.theme.colors.neutrals[999],
+            borderRadius: '10px',
+            flex: 1,
+            minHeight: '240px',
+          }}
+        >
+          <Image
             styleSheet={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              maxWidth: '200px',
-              padding: '16px',
-              backgroundColor: appConfig.theme.colors.neutrals[800],
-              border: '1px solid',
-              borderColor: appConfig.theme.colors.neutrals[999],
-              borderRadius: '10px',
-              flex: 1,
-              minHeight: '240px',
+              borderRadius: '50%',
+              marginBottom: '16px',
+            }}
+            src={`https://github.com/${user}.png`}
+          />
+          <Text
+            variant="body4"
+            styleSheet={{
+              color: appConfig.theme.colors.neutrals[200],
+              backgroundColor: appConfig.theme.colors.neutrals[900],
+              padding: '3px 10px',
+              borderRadius: '1000px',
             }}
           >
-            <Image
-              styleSheet={{
-                borderRadius: '50%',
-                marginBottom: '16px',
-              }}
-              src={`https://github.com/${user}.png`}
-            />
-            <Text
-              variant="body4"
-              styleSheet={{
-                color: appConfig.theme.colors.neutrals[200],
-                backgroundColor: appConfig.theme.colors.neutrals[900],
-                padding: '3px 10px',
-                borderRadius: '1000px',
-              }}
-            >
-              {user}
-            </Text>
-          </Box>
+            {user}
+          </Text>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }
 
