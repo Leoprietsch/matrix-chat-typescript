@@ -1,14 +1,14 @@
 import {
   Box, Button, Text, TextField, Image,
 } from '@skynexui/components';
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import appConfig from '../styles.json';
 import Title from '../components/Title';
 
 import GlobalStyle from '../utils/GlobalStyle';
 
 function HomePage() {
-  const username = 'leoprietsch';
+  const [user, setUser] = useState('leoprietsch');
 
   return (
     <>
@@ -68,7 +68,10 @@ function HomePage() {
             </Text>
 
             <TextField
-              name="passwordInput"
+              name="user"
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                setUser(event.target.value);
+              }}
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -111,7 +114,7 @@ function HomePage() {
                 borderRadius: '50%',
                 marginBottom: '16px',
               }}
-              src={`https://github.com/${username}.png`}
+              src={`https://github.com/${user}.png`}
             />
             <Text
               variant="body4"
@@ -122,7 +125,7 @@ function HomePage() {
                 borderRadius: '1000px',
               }}
             >
-              {username}
+              {user}
             </Text>
           </Box>
         </Box>
