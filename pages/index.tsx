@@ -1,7 +1,7 @@
 import {
   Box, Button, Text, TextField, Image,
 } from '@skynexui/components';
-import React, { ChangeEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import appConfig from '../styles.json';
 import Title from '../components/Title';
@@ -77,7 +77,7 @@ function HomePage() {
 
           <TextField
             name="user"
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            onChange={(event) => {
               setUser(event.target.value);
             }}
             fullWidth
