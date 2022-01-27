@@ -59,7 +59,7 @@ export default function MessageList(props: { messages: Message[] }) {
     <Box
       tag="ul"
       styleSheet={{
-        overflow: 'scroll',
+        overflow: 'auto',
         display: 'flex',
         flexDirection: 'column-reverse',
         flex: 1,
