@@ -35,11 +35,10 @@ export default function Chat() {
           borderRadius: '5px',
           backgroundColor: appConfig.theme.colors.neutrals[700],
           height: '100%',
-          maxWidth: '95%',
-          overflow: 'hidden',
+          maxWidth: '75vw',
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          maxHeight: '95vh',
+          maxHeight: '75vh',
           padding: '32px',
         }}
       >
