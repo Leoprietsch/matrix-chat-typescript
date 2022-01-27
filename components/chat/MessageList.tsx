@@ -6,7 +6,10 @@ export default function MessageList(props: { messages: Message[] }) {
   const { messages } = props;
 
   const renderMessages = (messagesToRender: Message[]) => messagesToRender.map((message) => {
-    const { id, from, text } = message;
+    const {
+      id, from, text, date,
+    } = message;
+
     return (
       <Text
         key={id}
@@ -33,7 +36,7 @@ export default function MessageList(props: { messages: Message[] }) {
               display: 'inline-block',
               marginRight: '8px',
             }}
-            src="https://github.com/vanessametonini.png"
+            src={`https://github.com/${from}.png`}
           />
           <Text tag="strong">{from}</Text>
           <Text
@@ -44,7 +47,7 @@ export default function MessageList(props: { messages: Message[] }) {
             }}
             tag="span"
           >
-            {new Date().toLocaleDateString()}
+            {date.toLocaleString()}
           </Text>
         </Box>
         {text}

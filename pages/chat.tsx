@@ -36,6 +36,7 @@ export default function Chat() {
           backgroundColor: appConfig.theme.colors.neutrals[700],
           height: '100%',
           maxWidth: '95%',
+          overflow: 'hidden',
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           maxHeight: '95vh',
@@ -70,9 +71,10 @@ export default function Chat() {
                 if (event.key === 'Enter') {
                   const newMessage: Message = {
                     text: message,
-                    from: 'user',
+                    from: 'leoprietsch',
+                    date: new Date(),
                   };
-                  setMessages([...messages, newMessage]);
+                  setMessages([newMessage, ...messages]);
                   setMessage('');
                 }
               }}
