@@ -5,9 +5,11 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5v
 const URL = 'https://vwtnjatwggxihvrnntha.supabase.co';
 const supabaseClient = createClient(URL, SUPABASE_ANON_KEY);
 
-const supabaseMessages = supabaseClient
+export const supabaseMessages = () => supabaseClient
   .from<Message>('messages')
   .select('*')
   .then((response) => response.data);
 
-export default supabaseMessages;
+export const supabaseSendNewMessage = (message: Message) => supabaseClient
+  .from<Message>('messages')
+  .insert(message);

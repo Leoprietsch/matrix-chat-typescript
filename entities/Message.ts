@@ -1,8 +1,8 @@
 interface Message {
-  id?: string,
+  id?: number,
   text: string,
   from: string,
-  date: Date,
+  date?: Date,
 }
 
 export default Message;
