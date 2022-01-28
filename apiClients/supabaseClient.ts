@@ -7,8 +7,7 @@ const supabaseClient = createClient(URL, SUPABASE_ANON_KEY);
 
 export const supabaseMessages = () => supabaseClient
   .from<Message>('messages')
-  .select('*')
-  .then((response) => response.data);
+  .select('*');
 
 export const supabaseSendNewMessage = (message: Message) => supabaseClient
   .from<Message>('messages')

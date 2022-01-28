@@ -1,13 +1,22 @@
 import { Box, TextField } from '@skynexui/components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabaseMessages, supabaseSendNewMessage } from '../apiClients/supabaseClient';
 import Header from '../components/chat/Header';
 import MessageList from '../components/chat/MessageList';
 import Message from '../entities/Message';
 import appConfig from '../styles.json';
 
 export default function Chat() {
+  const user = 'leoprietsch';
+  const [emptyMessages, setEmptyMessages] = useState<Message[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState('');
+
+  const getMessages = () => supabaseMessages().then((data) => data);
+
+  useEffect(() => {
+    getMessages().then((response) => setMessages(response.data?.reverse() || []));
+  }, [emptyMessages]);
 
   return (
     <Box
@@ -70,11 +79,13 @@ export default function Chat() {
                 if (event.key === 'Enter') {
                   const newMessage: Message = {
                     text: message,
-                    from: 'leoprietsch',
-                    date: new Date(),
+                    from: user,
                   };
-                  setMessages([newMessage, ...messages]);
+
                   setMessage('');
+                  supabaseSendNewMessage(newMessage).then(() => {
+                    setEmptyMessages([newMessage]);
+                  });
                 }
               }}
               name="message"

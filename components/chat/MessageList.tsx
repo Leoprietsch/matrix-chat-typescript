@@ -5,9 +5,9 @@ import Message from '../../entities/Message';
 export default function MessageList(props: { messages: Message[] }) {
   const { messages } = props;
 
-  const renderMessages = (messagesToRender: Message[]) => messagesToRender.map((message) => {
+  const messagesHandler = (messagesToRender: Message[]) => messagesToRender.map((message) => {
     const {
-      id, from, text, date,
+      id, from, text, date = '',
     } = message;
 
     return (
@@ -47,7 +47,7 @@ export default function MessageList(props: { messages: Message[] }) {
             }}
             tag="span"
           >
-            {date.toLocaleString()}
+            {new Date(date).toLocaleString()}
           </Text>
         </Box>
         {text}
@@ -67,7 +67,7 @@ export default function MessageList(props: { messages: Message[] }) {
         marginBottom: '16px',
       }}
     >
-      {renderMessages(messages)}
+      {messagesHandler(messages)}
     </Box>
   );
 }
