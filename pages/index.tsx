@@ -52,7 +52,7 @@ function HomePage() {
           // @ts-ignore
           onSubmit={(event: SubmitEvent) => {
             event.preventDefault();
-            router.push('/chat');
+            router.push(`/chat?user=${user}`);
           }}
           styleSheet={{
             display: 'flex',
