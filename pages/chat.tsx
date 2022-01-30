@@ -1,4 +1,5 @@
 import { Box, TextField } from '@skynexui/components';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { supabaseMessages, supabaseSendNewMessage } from '../apiClients/supabaseClient';
 import Header from '../components/chat/Header';
@@ -7,7 +8,9 @@ import Message from '../entities/Message';
 import appConfig from '../styles.json';
 
 export default function Chat() {
-  const user = 'leoprietsch';
+  const router = useRouter();
+  const { user } = router.query;
+
   const [emptyMessages, setEmptyMessages] = useState<Message[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState('');
@@ -79,7 +82,7 @@ export default function Chat() {
                 if (event.key === 'Enter') {
                   const newMessage: Message = {
                     text: message,
-                    from: user,
+                    from: user as string,
                   };
 
                   setMessage('');
