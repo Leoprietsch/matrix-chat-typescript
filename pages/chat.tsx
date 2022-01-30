@@ -1,7 +1,8 @@
 import { Box, TextField } from '@skynexui/components';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { supabaseMessages, supabaseSendNewMessage } from '../apiClients/supabaseClient';
+import { supabaseMessages, supabaseSendNewMessage, supabaseMessagesSubscriber } from '../apiClients/supabaseClient';
+import ButtonSendSticker from '../components/chat/ButtonSendSticker';
 import Header from '../components/chat/Header';
 import MessageList from '../components/chat/MessageList';
 import Message from '../entities/Message';
@@ -13,13 +14,26 @@ export default function Chat() {
 
   const [emptyMessages, setEmptyMessages] = useState<Message[]>([]);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState<string>('');
 
   const getMessages = () => supabaseMessages().then((data) => data);
 
+  const handleNewMessage = (newMessage: Message) => {
+    setMessage('');
+    supabaseSendNewMessage(newMessage).then(() => {
+      setEmptyMessages([newMessage]);
+    });
+  };
+
   useEffect(() => {
-    getMessages().then((response) => setMessages(response.data?.reverse() || []));
+    getMessages().then((response) => setMessages(response.data || []));
   }, [emptyMessages]);
+
+  useEffect(() => {
+    supabaseMessagesSubscriber((newMessage) => {
+      handleNewMessage(newMessage);
+    });
+  });
 
   return (
     <Box
@@ -84,11 +98,7 @@ export default function Chat() {
                     text: message,
                     from: user as string,
                   };
-
-                  setMessage('');
-                  supabaseSendNewMessage(newMessage).then(() => {
-                    setEmptyMessages([newMessage]);
-                  });
+                  handleNewMessage(newMessage);
                 }
               }}
               name="message"
@@ -104,6 +114,16 @@ export default function Chat() {
                 marginRight: '12px',
                 color: appConfig.theme.colors.neutrals[200],
               }}
+            />
+            <ButtonSendSticker onStickerClick={(sticker) => {
+              setMessage(sticker);
+              const newMessage: Message = {
+                from: user as string,
+                text: sticker,
+                isSticker: true,
+              };
+              handleNewMessage(newMessage);
+            }}
             />
           </Box>
         </Box>

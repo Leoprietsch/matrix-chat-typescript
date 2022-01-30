@@ -7,7 +7,7 @@ export default function MessageList(props: { messages: Message[] }) {
 
   const messagesHandler = (messagesToRender: Message[]) => messagesToRender.map((message) => {
     const {
-      id, from, text, date = '',
+      id, from, text, isSticker, date,
     } = message;
 
     return (
@@ -47,10 +47,21 @@ export default function MessageList(props: { messages: Message[] }) {
             }}
             tag="span"
           >
-            {new Date(date).toLocaleString()}
+            {new Date(date || '').toLocaleString()}
           </Text>
         </Box>
-        {text}
+        {isSticker ? (
+          <Image
+            src={text}
+            alt="Sticker"
+            styleSheet={{
+              maxWidth: '150px',
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              maxHeight: '150px',
+            }}
+          />
+        ) : <Text>{ text }</Text>}
       </Text>
     ) as React.ReactElement;
   });

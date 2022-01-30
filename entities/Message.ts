@@ -1,7 +1,8 @@
 interface Message {
   id?: number,
-  text: string,
   from: string,
+  text: string,
+  isSticker?: boolean,
   date?: Date,
 }
 
