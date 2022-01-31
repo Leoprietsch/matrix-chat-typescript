@@ -64,7 +64,7 @@ function HomePage() {
             marginBottom: '32px',
           }}
         >
-          <Title tag="h1">Boas vindas de volta!</Title>
+          <Title tag="h1">Welcome back!</Title>
           <Text
             variant="body3"
             styleSheet={{
