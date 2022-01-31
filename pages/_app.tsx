@@ -7,7 +7,6 @@ function App({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Component {...pageProps} />
-      ;
     </>
   );
 }
