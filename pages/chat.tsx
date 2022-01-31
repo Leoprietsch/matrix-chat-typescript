@@ -102,7 +102,7 @@ export default function Chat() {
                 }
               }}
               name="message"
-              placeholder="Insira sua mensagem aqui..."
+              placeholder="Write your message..."
               type="textarea"
               styleSheet={{
                 width: '100%',
