@@ -2,6 +2,14 @@ import { Box, Text, Image } from '@skynexui/components';
 import appConfig from '../../styles.json';
 import Message from '../../entities/Message';
 
+const dateOptions: Intl.DateTimeFormatOptions = {
+  day: '2-digit',
+  month: '2-digit',
+  year: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+};
+
 export default function MessageList(props: { messages: Message[] }) {
   const { messages } = props;
 
@@ -47,7 +55,7 @@ export default function MessageList(props: { messages: Message[] }) {
             }}
             tag="span"
           >
-            {new Date(date || '').toLocaleString()}
+            {new Date(date || '').toLocaleString('pt-br', dateOptions)}
           </Text>
         </Box>
         {isSticker ? (
